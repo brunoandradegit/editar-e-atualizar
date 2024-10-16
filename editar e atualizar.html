@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuário</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+          rel="stylesheet" 
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+          crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Editar e Atualizar o Usuário</h1>
+
+        <form id="usuarioForm" class="mt-4">
+            <div class="mb-3">
+                <label for="id" class="form-label">ID do Usuário</label>
+                <input type="number" class="form-control" id="id" name="id" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <button type="button" class="btn btn-success" onclick="atualizarUsuario()">Atualizar</button>
+        </form>
+
+        <h2 class="mt-5">Usuários</h2>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID do Usuário</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                </tr>
+            </thead>
+            <tbody id="usuariosList">
+                <tr>
+                    <td>1</td>
+                    <td>Bruno</td>
+                    <td>bruno@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Vinicius</td>
+                    <td>vinicius@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Holeon</td>
+                    <td>holeon@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Natasha</td>
+                    <td>natasha@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>William</td>
+                    <td>william@gmail.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function atualizarUsuario() {
+            const id = document.getElementById('id').value;
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+
+            const usuariosList = document.getElementById('usuariosList');
+            const usuarios = Array.from(usuariosList.getElementsByTagName('tr'));
+
+            let usuarioEncontrado = false;
+
+            usuarios.forEach((usuario) => {
+                const usuarioId = usuario.cells[0].textContent;
+                if (usuarioId === id) {
+                    usuario.cells[1].textContent = nome;
+                    usuario.cells[2].textContent = email;
+                    usuarioEncontrado = true;
+                }
+            });
+
+            if (!usuarioEncontrado) {
+                alert("Usuário não encontrado.");
+            } else {
+                alert("Usuário atualizado com sucesso!");
+            }
+        }
+    </script>
+</body>
+</html>
